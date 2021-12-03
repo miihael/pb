@@ -3,7 +3,7 @@ package pb_test
 import (
 	"time"
 
-	"github.com/cheggaaa/pb"
+	"github.com/miihael/pb"
 )
 
 func Example() {

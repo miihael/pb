@@ -1,4 +1,4 @@
-module github.com/cheggaaa/pb
+module github.com/miihael/pb
 
 require (
 	github.com/fatih/color v1.9.0

@@ -1,4 +1,4 @@
-module github.com/cheggaaa/pb/v3
+module github.com/miihael/pb/v3
 
 require (
 	github.com/VividCortex/ewma v1.2.0

@@ -17,7 +17,7 @@ import (
 	"github.com/mattn/go-colorable"
 	"github.com/mattn/go-isatty"
 
-	"github.com/cheggaaa/pb/v3/termutil"
+	"github.com/miihael/pb/v3/termutil"
 )
 
 // Version of ProgressBar library

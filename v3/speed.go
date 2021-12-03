@@ -10,14 +10,14 @@ import (
 
 var speedAddLimit = time.Second / 2
 
-type speed struct {
+type Speed struct {
 	ewma                  ewma.MovingAverage
 	lastStateId           uint64
 	prevValue, startValue int64
 	prevTime, startTime   time.Time
 }
 
-func (s *speed) value(state *State) float64 {
+func (s *Speed) value(state *State) float64 {
 	if s.ewma == nil {
 		s.ewma = ewma.NewMovingAverage()
 	}
@@ -44,7 +44,7 @@ func (s *speed) value(state *State) float64 {
 	return s.ewma.Value()
 }
 
-func (s *speed) reset(state *State) {
+func (s *Speed) reset(state *State) {
 	s.lastStateId = state.Id()
 	s.startTime = state.Time()
 	s.prevTime = state.Time()
@@ -53,18 +53,18 @@ func (s *speed) reset(state *State) {
 	s.ewma = ewma.NewMovingAverage()
 }
 
-func (s *speed) absValue(state *State) float64 {
+func (s *Speed) absValue(state *State) float64 {
 	if dur := state.Time().Sub(s.startTime); dur > 0 {
 		return float64(state.Value()) / dur.Seconds()
 	}
 	return 0
 }
 
-func getSpeedObj(state *State) (s *speed) {
-	if sObj, ok := state.Get(speedObj).(*speed); ok {
+func GetSpeedObj(state *State) (s *Speed) {
+	if sObj, ok := state.Get(speedObj).(*Speed); ok {
 		return sObj
 	}
-	s = new(speed)
+	s = new(Speed)
 	state.Set(speedObj, s)
 	return
 }
@@ -75,9 +75,14 @@ func getSpeedObj(state *State) (s *speed) {
 // Second string will be used when speed not available, default is "? p/s"
 // In template use as follows: {{speed .}} or {{speed . "%s per second"}} or {{speed . "%s ps" "..."}
 var ElementSpeed ElementFunc = func(state *State, args ...string) string {
-	sp := getSpeedObj(state).value(state)
+	sp := GetSpeedObj(state).value(state)
 	if sp == 0 {
 		return argsHelper(args).getNotEmptyOr(1, "? p/s")
 	}
 	return fmt.Sprintf(argsHelper(args).getNotEmptyOr(0, "%s p/s"), state.Format(int64(round(sp))))
+}
+
+var ElementFloatSpeed ElementFunc = func(state *State, args ...string) string {
+	sp := GetSpeedObj(state).value(state)
+	return fmt.Sprintf(argsHelper(args).getOr(0, "%f"), sp)
 }

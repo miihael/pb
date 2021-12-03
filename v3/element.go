@@ -38,6 +38,7 @@ var elements = map[string]Element{
 	"counters": ElementCounters,
 	"bar":      adaptiveWrap(ElementBar),
 	"speed":    ElementSpeed,
+	"fspeed":   ElementFloatSpeed,
 	"rtime":    ElementRemainingTime,
 	"etime":    ElementElapsedTime,
 	"string":   ElementString,
@@ -284,7 +285,7 @@ var ElementRemainingTime ElementFunc = func(state *State, args ...string) string
 	if state.IsFinished() {
 		return fmt.Sprintf(argsHelper(args).getOr(1, "%s"), elapsedTime(state))
 	}
-	sp := getSpeedObj(state).value(state)
+	sp := GetSpeedObj(state).value(state)
 	if sp > 0 {
 		remain := float64(state.Total() - state.Value())
 		remainDur := time.Duration(remain/sp) * time.Second

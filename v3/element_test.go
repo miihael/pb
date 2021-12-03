@@ -142,6 +142,7 @@ func TestElementSpeed(t *testing.T) {
 		}
 		r := ElementSpeed(state)
 		r2 := ElementSpeed(state)
+		f := ElementFloatSpeed(state, "%.1f")
 		if r != r2 {
 			t.Errorf("Must be the same: '%s' vs '%s'", r, r2)
 		}
@@ -150,9 +151,15 @@ func TestElementSpeed(t *testing.T) {
 			if w := "? p/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
 			}
+			if w := "0.0"; f != w {
+				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, f, w)
+			}
 		} else if state.finished {
 			if w := "58 p/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
+			}
+			if w := "57.8"; f != w {
+				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, f, w)
 			}
 			state.time = state.time.Add(-time.Hour)
 			r = ElementSpeed(state)
@@ -162,6 +169,9 @@ func TestElementSpeed(t *testing.T) {
 		} else {
 			if w := "42 p/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
+			}
+			if w := "42.0"; f != w {
+				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, f, w)
 			}
 		}
 	}

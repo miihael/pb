@@ -71,15 +71,15 @@ func GetSpeedObj(state *State) (s *Speed) {
 
 // ElementSpeed calculates current speed by EWMA
 // Optionally can take one or two string arguments.
-// First string will be used as value for format speed, default is "%s p/s".
-// Second string will be used when speed not available, default is "? p/s"
+// First string will be used as value for format speed, default is "%s/s".
+// Second string will be used when speed not available, default is "?/s"
 // In template use as follows: {{speed .}} or {{speed . "%s per second"}} or {{speed . "%s ps" "..."}
 var ElementSpeed ElementFunc = func(state *State, args ...string) string {
 	sp := GetSpeedObj(state).value(state)
 	if sp == 0 {
-		return argsHelper(args).getNotEmptyOr(1, "? p/s")
+		return argsHelper(args).getNotEmptyOr(1, "?/s")
 	}
-	return fmt.Sprintf(argsHelper(args).getNotEmptyOr(0, "%s p/s"), state.Format(int64(round(sp))))
+	return fmt.Sprintf(argsHelper(args).getNotEmptyOr(0, "%s/s"), state.Format(int64(round(sp))))
 }
 
 var ElementFloatSpeed ElementFunc = func(state *State, args ...string) string {

@@ -112,7 +112,7 @@ func TestAddTotal(t *testing.T) {
 func TestPBTemplate(t *testing.T) {
 	bar := new(ProgressBar)
 	result := bar.SetTotal(100).SetCurrent(50).SetWidth(40).String()
-	expected := "50 / 100 [------->________] 50.00% ? p/s"
+	expected := "50 / 100 [-------->_________] 50.00% ?/s"
 	if result != expected {
 		t.Errorf("Unexpected result: (actual/expected)\n%s\n%s", result, expected)
 	}

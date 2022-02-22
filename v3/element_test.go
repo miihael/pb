@@ -148,14 +148,14 @@ func TestElementSpeed(t *testing.T) {
 		}
 		if i < 1 {
 			// do not calc first result
-			if w := "? p/s"; r != w {
+			if w := "?/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
 			}
 			if w := "0.0"; f != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, f, w)
 			}
 		} else if state.finished {
-			if w := "58 p/s"; r != w {
+			if w := "58/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
 			}
 			if w := "57.8"; f != w {
@@ -163,11 +163,11 @@ func TestElementSpeed(t *testing.T) {
 			}
 			state.time = state.time.Add(-time.Hour)
 			r = ElementSpeed(state)
-			if w := "? p/s"; r != w {
+			if w := "?/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
 			}
 		} else {
-			if w := "42 p/s"; r != w {
+			if w := "42/s"; r != w {
 				t.Errorf("Unexpected result[%d]: '%s' vs '%s'", i, r, w)
 			}
 			if w := "42.0"; f != w {

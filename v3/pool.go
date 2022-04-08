@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cheggaaa/pb/v3/termutil"
+	"github.com/miihael/pb/v3/termutil"
 )
 
 // Create and start new pool with given bars

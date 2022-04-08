@@ -1,11 +1,9 @@
 # Terminal progress bar for Go
 
-[![Coverage Status](https://coveralls.io/repos/github/cheggaaa/pb/badge.svg)](https://coveralls.io/github/cheggaaa/pb)
-
 ## Installation
 
 ```
-go get github.com/cheggaaa/pb/v3
+go get github.com/miihael/pb/v3
 ```
 
 Documentation for v1 bar available [here](README_V1.md).
@@ -18,7 +16,7 @@ package main
 import (
 	"time"
 
-	"github.com/cheggaaa/pb/v3"
+	"github.com/miihael/pb/v3"
 )
 
 func main() {
@@ -93,7 +91,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/cheggaaa/pb/v3"
+	"github.com/miihael/pb/v3"
 )
 
 func main() {

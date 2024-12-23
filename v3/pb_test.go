@@ -248,7 +248,7 @@ func BenchmarkRender(b *testing.B) {
 		b.Run(names[i], func(b *testing.B) {
 			b.ReportAllocs()
 			for i := 0; i < b.N; i++ {
-				bar.String()
+				_ = bar.String()
 			}
 		})
 	}

@@ -26,6 +26,10 @@ func (r *Reader) Close() (err error) {
 	return
 }
 
+func (r *Reader) Total() int64 {
+	return r.bar.Total()
+}
+
 // Writer it's a wrapper for given writer, but with progress handle
 type Writer struct {
 	io.Writer
